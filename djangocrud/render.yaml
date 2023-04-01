@@ -1,0 +1,8 @@
+# Archivo de configuración para desplegar una aplicación de Django en Render.com
+services:
+  - name: web
+    buildCommand: python manage.py migrate && python manage.py collectstatic --noinput
+    startCommand: gunicorn djangocrud.wsgi:application --bind 0.0.0.0:$PORT
+    env:
+      - key: DJANGO_SETTINGS_MODULE
+        value: myproject.settings
